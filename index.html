@@ -72,12 +72,16 @@
 
 	info.update = function (props) {
 		this._div.innerHTML = (props ?
-			'<h2><b><center>' + props.LONGNAME
-			+ '</b></center></h2>' + ((props.REP / (props.DEM + props.REP + props.LIB + props.NL + props.OTR))*100).toFixed(2) + '% Republican '
-			+ '<br>' + ((props.DEM / (props.DEM + props.REP + props.LIB + props.OTR))*100).toFixed(2) + '% Democrat '
-			+ '<br>' + ((props.OTR / (props.DEM + props.REP + props.LIB + props.OTR))*100).toFixed(2) + '% Other '
-			+ '<br><br>' + leanCalc(((props.REP / (props.DEM + props.REP + props.LIB + props.NL + props.OTR))*100).toFixed(2), ((props.DEM / (props.DEM + props.REP + props.LIB + props.OTR))*100).toFixed(2))
-			+ '<h4>' + props.REP + ' Republicans '
+			'<h2><b><center>Precinct<br>' + props.PRECINCT
+			+ '</b></center></h2>' + ((props.TRUMP / (props.BALLOTS_CA))*100).toFixed(2) + '% Trump '
+			+ '<h4>' + props.TRUMP + ' Votes for Donald Trump'
+			+ '</b></center></h2>' +  + ((props.HARRIS / (props.BALLOTS_CA))*100).toFixed(2) + '% Harris '
+			+ '<h4>' + props.HARRIS + ' Votes for Kamala Harris'
+			+ '</b></center></h2>' + (((props.OLIVER + props.STEIN + props.WRITE_IN) / (props.BALLOTS_CA))*100).toFixed(2) + '% Others'
+			+ '<h4>' + props.OLIVER + ' Votes for Chase Oliver'
+			+ '<h4>' + props.STEIN + ' Votes for Jill Stein'
+			+ '<h4>' + props.WRITE_IN + ' Write-in votes'
+			+ '</b></center></h2>' + leanCalc(((props.TRUMP / (props.BALLOTS_CA))*100).toFixed(2), ((props.HARRIS / (props.BALLOTS_CA))*100).toFixed(2))
 			+ '<br>' + props.DEM + ' Democrats '
 			+ '<br>' + props.OTR + ' Others '
 			+ '<br>' + props.LIB + ' Libertarians '
@@ -95,9 +99,9 @@
 
 	function leanCalc(pctRep, pctDem) {
 		if (pctRep > pctDem) {
- 	 	return '<span style="color: red;"><center><b>Leans GOP +' + (pctRep - pctDem).toFixed(2) + '%</b></center></span>';
+ 	 	return '<span style="color: red;"><center><b>Trump by ' + (pctRep - pctDem).toFixed(2) + '%</b></center></span>';
 		} else {
-		return '<span style="color: blue;"><center><b>Leans Dem +' + (pctDem - pctRep).toFixed(2) + '%</b></center></span>';
+		return '<span style="color: blue;"><center><b>Harris by ' + (pctDem - pctRep).toFixed(2) + '%</b></center></span>';
 		}
 	}
 
